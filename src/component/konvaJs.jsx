@@ -281,11 +281,8 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
 
         updated.x = sx;
         updated.y = sy;
-        updated.points = [0, 0, cx - sx, cy - sy]; // relative to (x,y)
+        updated.points = [0, 0, cx - sx, cy - sy]; 
       }
-      // if (drawingShape.type === "arrow") {
-      //   updated.points = [sx, sy, cx, cy];
-      // }
 
       setDrawingShape(updated);
       return;
@@ -393,7 +390,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
       img.onload = () => {
         const newImg = {
           imgObj: img,
-          src: e.target.result, // ✅ persistent Base64
+          src: e.target.result, 
           x: 0,
           y: 0,
           width: img.width * 0.3,
