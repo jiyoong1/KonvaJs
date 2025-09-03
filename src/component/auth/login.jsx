@@ -5,8 +5,8 @@ import { useAuth } from "./authContext";
 export default function LoginPage() {
   const demoUsers = JSON.parse(import.meta.env.VITE_DEMO_USERS || "[]");
 
-  const [email, setEmail] = useState(demoUsers[0]?.email || "");
-  const [password, setPassword] = useState(demoUsers[0]?.password || "");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
