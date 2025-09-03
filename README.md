@@ -4,6 +4,11 @@ Hii Steve,
 
 This is a project regarding **KonvaJs drawing tools** using **ReactJS** , **KonvaJs** and **Tailwind** to complete.
 
+## run this project
+1. `npm install`  
+2. `npm run build`  
+3. `npm run preview`  
+
 ## **USER authentication edit**
 Can edit at `.env.local`  
 `VITE_DEMO_USERS` to add or edit user login details
