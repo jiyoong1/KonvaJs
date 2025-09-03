@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import {  Routes, Route, Navigate } from "react-router-dom";
+
 import { AuthProvider, useAuth } from "./component/auth/authContext";
 import LoginPage from "./component/auth/login";
 import ProtectedRoute from "./component/auth/protectRoute";
@@ -12,8 +13,8 @@ export default function App() {
   return (
     <AuthProvider>
       <Icons />
-      <div className=" p-[40px] pt-0 bg-gradient-to-r grid from-blue-200 via-purple-300 to-pink-200 ">
-        <div className="min-h-screen grid grid-cols-[auto_1fr] justify-start items-start ">
+      <div className="p-[40px] pt-0 bg-gradient-to-r grid from-blue-200 via-purple-300 to-pink-200">
+        <div className="min-h-screen grid grid-cols-[auto_1fr] justify-start items-start">
           <Panel />
           <Routes>
             <Route path="/login" element={<LoginPage />} />
