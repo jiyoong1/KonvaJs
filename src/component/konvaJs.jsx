@@ -68,7 +68,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
   useEffect(() => {
     if (!roomId) return; // only connect after roomId is set
 
-    socketRef.current = io("http://localhost:4000");
+    socketRef.current = io("https://node-js-sigma-seven.vercel.app/");
     socketRef.current.emit("joinRoom", roomId);
 
     socketRef.current.on("updateCanvas", (data) => {
@@ -592,7 +592,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
   return (
     <div
       ref={containerRef}
-      className="flex flex-col items-center w-full relative"
+      className="relative flex flex-col items-center w-full"
       onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => {
         e.preventDefault();
@@ -644,7 +644,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
       )}
       {saveProjectMode && (
         <div className="fixed top-0 left-0 min-h-screen min-w-screen bg-[#3e3e3ef7] flex justify-center items-center z-20">
-          <div ref={projectNameRef} className="bg-white p-6 rounded shadow-lg w-96 relative">
+          <div ref={projectNameRef} className="relative p-6 bg-white rounded shadow-lg w-96">
             <p
               id="errormsg"
               className="border border-solid border-red-600 bg-red-300 text-center mb-[10px] text-red-600 px-[10px] py-[5px] rounded-[7px] shadow-2xl hidden"
@@ -652,21 +652,21 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
               {" "}
               Empty project cannot save
             </p>
-            <h2 className="text-xl font-bold mb-4">Save Project</h2>
+            <h2 className="mb-4 text-xl font-bold">Save Project</h2>
             <input
               type="text"
               placeholder="Project Name"
-              className="w-full border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-3 py-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <div className="flex justify-end space-x-2">
-              <button onClick={() => setSaveProjectMode(false)} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">
+              <button onClick={() => setSaveProjectMode(false)} className="px-4 py-2 transition bg-gray-300 rounded hover:bg-gray-400">
                 Cancel
               </button>
               <button
                 onClick={() => {
                   saveProject();
                 }}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                className="px-4 py-2 text-white transition bg-blue-500 rounded hover:bg-blue-600"
               >
                 Save
               </button>
@@ -676,7 +676,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
       )}
       {exportProjectMode && (
         <div className="fixed top-0 left-0 min-h-screen min-w-screen bg-[#3e3e3ef7] flex justify-center items-center z-20">
-          <div ref={exportProjectRef} className="bg-white p-6 rounded shadow-lg w-120 relative">
+          <div ref={exportProjectRef} className="relative p-6 bg-white rounded shadow-lg w-120">
             <p
               id="errormsgExport"
               className="border border-solid border-red-600 bg-red-300 text-center mb-[10px] text-red-600 px-[10px] py-[5px] rounded-[7px] shadow-2xl hidden"
@@ -684,7 +684,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
               {" "}
               Empty project cannot Export
             </p>
-            <h2 className="text-xl font-bold mb-4">Export Project</h2>
+            <h2 className="mb-4 text-xl font-bold">Export Project</h2>
             <div className="grid grid-cols-[1fr_100px] gap-[10px] mb-4 ">
               <input
                 type="text"
@@ -697,14 +697,14 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
               </select>
             </div>
             <div className="flex justify-end space-x-2">
-              <button onClick={() => setExportProjectMode(false)} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition">
+              <button onClick={() => setExportProjectMode(false)} className="px-4 py-2 transition bg-gray-300 rounded hover:bg-gray-400">
                 Cancel
               </button>
               <button
                 onClick={() => {
                   exportProject();
                 }}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                className="px-4 py-2 text-white transition bg-blue-500 rounded hover:bg-blue-600"
               >
                 Export
               </button>
@@ -718,12 +718,12 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
         </div>
       )}
       {!view && (
-        <div className="flex flex-wrap gap-3 mb-4 items-center bg-gray-100 p-3 rounded shadow">
+        <div className="flex flex-wrap items-center gap-3 p-3 mb-4 bg-gray-100 rounded shadow">
           {/* Tool selection */}
           <select
             value={tool}
             onChange={(e) => setTool(e.target.value)}
-            className="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             <option value="round">Round Brush</option>
             <option value="square">Square Brush</option>
@@ -737,15 +737,15 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
             <option value="edit-image">Edit Image</option>
             <option value="select">Select</option>
           </select>
-          <div className="relative group ml-2">
+          <div className="relative ml-2 group">
             <input type="color" value={color} onChange={(e) => setColor(e.target.value)} className="w-10 h-10 p-0 border rounded cursor-pointer" />
-            <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition pointer-events-none">
+            <span className="absolute px-2 py-1 text-xs text-white transition -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 group-hover:opacity-100">
               Stroke Color
             </span>
           </div>
           {["rect", "circle", "triangle"].includes(tool) && (
             <React.Fragment>
-              <label className="flex items-center space-x-2 ml-2 cursor-pointer">
+              <label className="flex items-center ml-2 space-x-2 cursor-pointer">
                 <span>Gradient</span>
                 <div className="relative">
                   <input type="checkbox" className="sr-only" checked={isGradient} onChange={(e) => setIsGradient(e.target.checked)} />
@@ -755,26 +755,26 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
                   ></div>
                 </div>
               </label>
-              <div className="relative group ml-2">
+              <div className="relative ml-2 group">
                 <input
                   type="color"
                   value={fillColor}
                   onChange={(e) => setFillColor(e.target.value)}
                   className="w-10 h-10 p-0 border rounded cursor-pointer"
                 />
-                <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                <span className="absolute px-2 py-1 text-xs text-white transition -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 group-hover:opacity-100">
                   {isGradient ? `Gradient From` : `Fill Color`}
                 </span>
               </div>
               {isGradient && (
-                <div className="relative group ml-2">
+                <div className="relative ml-2 group">
                   <input
                     type="color"
                     value={gradientTo}
                     onChange={(e) => setGradientTo(e.target.value)}
                     className="w-10 h-10 p-0 border rounded cursor-pointer"
                   />
-                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                  <span className="absolute px-2 py-1 text-xs text-white transition -translate-x-1/2 bg-gray-800 rounded opacity-0 pointer-events-none -top-8 left-1/2 group-hover:opacity-100">
                     Gradient To
                   </span>
                 </div>
@@ -786,7 +786,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
           <select
             value={fontFamily}
             onChange={(e) => setFontFamily(e.target.value)}
-            className="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
             <option value="Arial">Arial</option>
             <option value="Courier New">Courier</option>
@@ -798,28 +798,28 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
             max="72"
             value={fontSize}
             onChange={(e) => setFontSize(Number(e.target.value))}
-            className="w-16 border border-gray-300 rounded px-2 py-1 text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-16 px-2 py-1 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          <button onClick={() => handleUndo()} className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition">
+          <button onClick={() => handleUndo()} className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200">
             Undo
           </button>
-          <button onClick={() => handleRedo()} className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition">
+          <button onClick={() => handleRedo()} className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200">
             Redo
           </button>
-          <button onClick={() => handleZoom(0.1)} className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition">
+          <button onClick={() => handleZoom(0.1)} className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200">
             Zoom In
           </button>
-          <button onClick={() => handleZoom(-0.1)} className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition">
+          <button onClick={() => handleZoom(-0.1)} className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200">
             Zoom Out
           </button>
           <span className="text-sm text-gray-600">{Math.round(zoom * 100)}%</span>
-          <label className="px-3 py-1 bg-white border border-gray-300 rounded shadow cursor-pointer hover:bg-gray-200 transition">
+          <label className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow cursor-pointer hover:bg-gray-200">
             Upload Image
             <input type="file" accept="image/*" className="hidden" onChange={(e) => handleImageUpload(e.target.files[0])} />
           </label>
 
           <button
-            className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition"
+            className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200"
             onClick={() => {
               if (selectedShapeIndex === null) return;
               if (selectedShapeIndex < shapes.length - 1) {
@@ -836,7 +836,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
             Bring Forward
           </button>
           <button
-            className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition"
+            className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200"
             onClick={() => {
               if (selectedShapeIndex === null) return;
               if (selectedShapeIndex > 0) {
@@ -854,28 +854,28 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
           </button>
           <button
             onClick={() => setSaveProjectMode(true)}
-            className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition"
+            className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200"
           >
             Save
           </button>
           <button
             onClick={() => setExportProjectMode(true)}
-            className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition"
+            className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200"
           >
             Export
           </button>
-          <button onClick={clearProject} className="px-3 py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition">
+          <button onClick={clearProject} className="px-3 py-1 transition bg-white border border-gray-300 rounded shadow hover:bg-gray-200">
             Clear All
           </button>
-          <button onClick={generateRoomId} className="px-3 py-1 bg-green-500 text-white rounded shadow hover:bg-green-600 transition">
+          <button onClick={generateRoomId} className="px-3 py-1 text-white transition bg-green-500 rounded shadow hover:bg-green-600">
             Start Collaboration
           </button>
 
           {showRoomPopup && (
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 border border-solid border-gray-400 bg-white p-6 rounded shadow-lg z-50">
+            <div className="absolute z-50 p-6 -translate-x-1/2 bg-white border border-gray-400 border-solid rounded shadow-lg top-1/3 left-1/2">
               <p>Share this Room ID with your collaborator:</p>
-              <p className="font-bold text-xl">{roomId}</p>
-              <button onClick={() => setShowRoomPopup(false)} className="mt-4 px-3 py-1 bg-gray-300 rounded hover:bg-gray-400">
+              <p className="text-xl font-bold">{roomId}</p>
+              <button onClick={() => setShowRoomPopup(false)} className="px-3 py-1 mt-4 bg-gray-300 rounded hover:bg-gray-400">
                 Close
               </button>
             </div>
@@ -887,9 +887,9 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
               placeholder="Enter Room ID"
               value={joinRoomInput}
               onChange={(e) => setJoinRoomInput(e.target.value)}
-              className="border border-gray-300 rounded px-2 py-1"
+              className="px-2 py-1 border border-gray-300 rounded"
             />
-            <button onClick={joinRoom} className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+            <button onClick={joinRoom} className="px-3 py-1 text-white bg-blue-500 rounded hover:bg-blue-600">
               Join Room
             </button>
           </div>
@@ -1184,7 +1184,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
         >
           {`<< Previous`}
         </button>
-        <p className="border border-solid border-gray-300 rounded px-3 py-1">{currentPage}</p>
+        <p className="px-3 py-1 border border-gray-300 border-solid rounded">{currentPage}</p>
         <button
           onClick={() => handlePageUpdate("n")}
           className="w-[130px] flex justify-center items-center py-1 bg-white border border-gray-300 rounded shadow hover:bg-gray-200 transition"

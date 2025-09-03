@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "./auth/authContext";
+import { Link } from "react-router-dom";
 
 export default function Panel() {
   const { logout, user } = useAuth();
@@ -25,15 +26,15 @@ export default function Panel() {
       >
         {/* Content only if open */}
         <div className={`${isOpen ? "opacity-100" : "opacity-0"} transition-opacity duration-300`}>
-          <h2 className="text-2xl font-bold mb-4 text-center">Panel</h2>
-          <div className="space-y-2 flex flex-col">
-            <a href="/" className="p-2 bg-purple-100 rounded hover:bg-purple-200 transition cursor-pointer text-center font-medium">
+          <h2 className="mb-4 text-2xl font-bold text-center">Panel</h2>
+          <div className="flex flex-col space-y-2">
+            <Link to="/" className="p-2 font-medium text-center transition bg-purple-100 rounded cursor-pointer hover:bg-purple-200">
               Dashboard
-            </a>
-            <a href="/draw/" className="p-2 bg-purple-100 rounded hover:bg-purple-200 transition cursor-pointer text-center font-medium">
+            </Link>
+            <Link to="/draw" className="p-2 font-medium text-center transition bg-purple-100 rounded cursor-pointer hover:bg-purple-200">
               Draw
-            </a>
-            <div onClick={() => logout()} className="p-2 bg-purple-100 rounded hover:bg-purple-200 transition cursor-pointer text-center font-medium">
+            </Link>
+            <div onClick={() => logout()} className="p-2 font-medium text-center transition bg-purple-100 rounded cursor-pointer hover:bg-purple-200">
               Logout
             </div>
           </div>

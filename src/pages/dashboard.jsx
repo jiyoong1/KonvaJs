@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../component/auth/authContext";
 import KonvaCanvas from "../component/konvaJs";
 import { removeTemp } from "../assets/script/public";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -28,18 +29,18 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="p-6 flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-6 p-6">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-extrabold text-gray-800 mb-2">Welcome, {user?.name || "User"}!</h1>
-        <p className="text-gray-600 text-lg">
+        <h1 className="mb-2 text-3xl font-extrabold text-gray-800">Welcome, {user?.name || "User"}!</h1>
+        <p className="text-lg text-gray-600">
           You have <span className="font-semibold text-gray-900">{project.length}</span> project{project.length > 1 ? "s" : ""} saved.
         </p>
       </div>
 
       {/* Projects container */}
-      <div className=" flex items-start flex-col justify-start shadow-2xl rounded-2xl bg-white w-full max-w-4xl">
-        <div className="w-full h-full flex items-center justify-center text-gray-400 text-lg mt-4">Your projects canvas will appear here</div>
+      <div className="flex flex-col items-start justify-start w-full max-w-4xl bg-white shadow-2xl rounded-2xl">
+        <div className="flex items-center justify-center w-full h-full mt-4 text-lg text-gray-400">Your projects canvas will appear here</div>
         <div className="flex flex-col w-full gap-4 p-4 max-h-[600px] overflow-scroll overflow-x-hidden tinyScrollBar">
           {project &&
             project.length > 0 &&
@@ -64,7 +65,7 @@ export default function Dashboard() {
                         <use href="#icon-view" fill="#" />
                       </svg>
                     </div>
-                    <a href={`/draw/${index}/`}>
+                    <Link to={`/draw/${index}`}>
                       <div
                         className="w-[35px] h-[35px] rounded-full shadow-md border border-solid border-gray-400 flex items-center justify-center cursor-pointer hover:scale-105 transition"
                         title="Edit"
@@ -73,7 +74,7 @@ export default function Dashboard() {
                           <use href="#icon-edit" fill="#" />
                         </svg>
                       </div>
-                    </a>
+                    </Link>
                     <div
                       className="w-[35px] h-[35px] rounded-full shadow-md border border-solid border-gray-400 flex items-center justify-center cursor-pointer hover:scale-105 transition"
                       title="Delete"
@@ -93,7 +94,7 @@ export default function Dashboard() {
         </div>
       </div>
       {showCanvas && (
-        <div className="fixed  inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-white w-[800px] rounded-xl shadow-2xl p-4 relative">
             <button
               onClick={() => {
@@ -111,20 +112,20 @@ export default function Dashboard() {
         </div>
       )}
       {showConfirm && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white rounded-xl shadow-xl p-6 w-[300px] text-center relative">
-            <p className="text-lg font-medium text-gray-700 mb-4">Are you sure you want to delete this?</p>
+            <p className="mb-4 text-lg font-medium text-gray-700">Are you sure you want to delete this?</p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => {
                   handleDelete();
                   setShowConfirm(false);
                 }}
-                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                className="px-4 py-2 text-white transition bg-red-500 rounded-lg hover:bg-red-600"
               >
                 Delete
               </button>
-              <button onClick={() => setShowConfirm(false)} className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+              <button onClick={() => setShowConfirm(false)} className="px-4 py-2 text-gray-700 transition bg-gray-200 rounded-lg hover:bg-gray-300">
                 Cancel
               </button>
             </div>
