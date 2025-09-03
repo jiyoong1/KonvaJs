@@ -3,23 +3,22 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "./authContext";
 
 export default function LoginPage() {
-  const demoUsers = JSON.parse(
-    import.meta.env.VITE_DEMO_USERS || [
-      {
-        email: "demo@example.com",
-        password: "password123",
-        name: "Demo User 1",
-        id: "1",
-      },
-      {
-        email: "demo2@example.com",
-        password: "password123",
-        name: "Demo User 2",
-        id: "2",
-      },
-    ]
-  );
-
+  const demoUsers = import.meta.env.VITE_DEMO_USERS
+    ? JSON.parse(import.meta.env.VITE_DEMO_USERS)
+    : [
+        {
+          email: "demo@example.com",
+          password: "password123",
+          name: "Demo User 1",
+          id: "1",
+        },
+        {
+          email: "demo2@example.com",
+          password: "password123",
+          name: "Demo User 2",
+          id: "2",
+        },
+      ];
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
