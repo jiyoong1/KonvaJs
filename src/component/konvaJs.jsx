@@ -495,7 +495,7 @@ export default function KonvaCanvas({ height, view = false, drawId = null, edit 
     if (exportProjectRef.current.querySelector("select").value === "svg") {
       exportToSvg(saved, projectName, width, height);
     } else {
-      const exportMode = import.meta.env.VITE_EXPORT_PPTX;
+      const exportMode = import.meta.env.VITE_EXPORT_PPTX || 1;
       if (exportMode == 1) {
         exportProjectPPTXImage(saved, projectName, width, height);
       } else {

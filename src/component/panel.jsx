@@ -12,7 +12,7 @@ export default function Panel() {
       {/* Toggle button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="hover:opacity-100  opacity-40 absolute top-[70px] left-[40px] z-20 px-4 py-2 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition"
+        className="hover:opacity-100  opacity-40 absolute top-[30px] left-[40px] z-20 px-4 py-2 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition"
       >
         {isOpen ? "Hide Panel" : "Show Panel"}
       </button>
@@ -20,7 +20,7 @@ export default function Panel() {
       {/* Panel */}
       <div
         className={`bg-white rounded-lg shadow-lg overflow-hidden
-          transition-all duration-300 ease-in-out mt-[80px]
+          transition-all duration-300 ease-in-out mt-[40px]
           ${isOpen ? "w-60 p-4 mr-[20px]" : "w-0 p-0"}`}
       >
         {/* Content only if open */}
